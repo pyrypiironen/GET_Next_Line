@@ -43,14 +43,13 @@ static	int	read_fd(const int fd, char **line, char *arr[FD_SIZE])
 	int		bytes_read;
 	char	*tmp;
 
-	ft_bzero(buf, BUFF_SIZE + 1);
 	bytes_read = read(fd, buf, BUFF_SIZE);
+	buf[bytes_read] = '\0';
 	if (bytes_read > 0)
 	{
 		tmp = ft_strjoin(arr[fd], buf);
 		if (tmp == NULL)
 			return (-1);
-		ft_bzero(buf, BUFF_SIZE);
 		free(arr[fd]);
 		arr[fd] = tmp;
 		return (take_line(fd, line, arr, 1));
